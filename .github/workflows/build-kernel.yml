@@ -1,0 +1,67 @@
+name: Build WSL Kernel
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - build-kernel.sh
+      - CONFIG_KERNEL_WSL_ANDROID
+      - .github/workflows/build-kernel.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            flex \
+            bison \
+            dwarves \
+            libssl-dev \
+            libelf-dev \
+            cpio \
+            qemu-utils \
+            libncurses-dev \
+            libncursesw-dev \
+            wget \
+            unzip \
+            rsync \
+            xz-utils
+
+      - name: Download WSL kernel source
+        env:
+          KERNEL_VERSION: linux-msft-wsl-6.18.35.2
+        run: |
+          wget -O "${KERNEL_VERSION}.zip" "https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/${KERNEL_VERSION}.zip"
+          unzip -q "${KERNEL_VERSION}.zip"
+
+      - name: Build kernel and modules
+        env:
+          KERNEL_VERSION: linux-msft-wsl-6.18.35.2
+        run: |
+          cd "${KERNEL_VERSION}"
+          make -j"$(nproc)" KCONFIG_CONFIG=../CONFIG_KERNEL_WSL_ANDROID
+          make INSTALL_MOD_PATH="$PWD/modules" modules_install
+          find ./modules/lib/modules/"$(make -s kernelrelease)" -name '*.ko' -exec strip --strip-unneeded {} \;
+          sudo ./Microsoft/scripts/gen_modules_vhdx.sh "$PWD/modules" "$(make -s kernelrelease)" modules.vhdx
+          mv arch/x86/boot/bzImage Android.kernel
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: wsl-kernel-ubuntu24
+          path: |
+            linux-msft-wsl-6.18.35.2/Android.kernel
+            linux-msft-wsl-6.18.35.2/modules.vhdx
+          if-no-files-found: error
+          retention-days: 30
