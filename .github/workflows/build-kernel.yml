@@ -42,24 +42,27 @@ jobs:
         run: |
           wget -O "${KERNEL_VERSION}.zip" "https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/${KERNEL_VERSION}.zip"
           unzip -q "${KERNEL_VERSION}.zip"
+          SOURCE_DIR="$(find . -maxdepth 1 -type d -name 'WSL2-Linux-Kernel-*' -print -quit)"
+          test -n "$SOURCE_DIR"
+          echo "SOURCE_DIR=$SOURCE_DIR" >> "$GITHUB_ENV"
 
       - name: Build kernel and modules
-        env:
-          KERNEL_VERSION: linux-msft-wsl-6.18.35.2
         run: |
-          cd "${KERNEL_VERSION}"
+          cd "$SOURCE_DIR"
           make -j"$(nproc)" KCONFIG_CONFIG=../CONFIG_KERNEL_WSL_ANDROID
           make INSTALL_MOD_PATH="$PWD/modules" modules_install
           find ./modules/lib/modules/"$(make -s kernelrelease)" -name '*.ko' -exec strip --strip-unneeded {} \;
           sudo ./Microsoft/scripts/gen_modules_vhdx.sh "$PWD/modules" "$(make -s kernelrelease)" modules.vhdx
           mv arch/x86/boot/bzImage Android.kernel
+          cp Android.kernel "$GITHUB_WORKSPACE/Android.kernel"
+          cp modules.vhdx "$GITHUB_WORKSPACE/modules.vhdx"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: wsl-kernel-ubuntu24
           path: |
-            linux-msft-wsl-6.18.35.2/Android.kernel
-            linux-msft-wsl-6.18.35.2/modules.vhdx
+            Android.kernel
+            modules.vhdx
           if-no-files-found: error
           retention-days: 30
