@@ -2,14 +2,6 @@ name: Build WSL Kernel
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - master
-    paths:
-      - build-kernel.sh
-      - CONFIG_KERNEL_WSL_ANDROID
-      - .github/workflows/build-kernel.yml
 
 jobs:
   build:
