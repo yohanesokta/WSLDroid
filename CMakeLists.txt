@@ -3,6 +3,7 @@ project(OctaDroid LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Win32 GUI app configuration (prevents terminal popups on launch)
 set(WIN32_EXECUTABLE ON)
@@ -70,8 +71,17 @@ target_link_libraries(OctaDroid PRIVATE
     Qt6::OpenGLWidgets
     Qt6::OpenGL
     Qt6::Network
+    freerdp3
+    freerdp-client3
+    winpr3
 )
 
 target_include_directories(OctaDroid PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
+    "D:/Programs/MSYS/mingw64/include/freerdp3"
+    "D:/Programs/MSYS/mingw64/include/winpr3"
+)
+
+target_link_directories(OctaDroid PRIVATE
+    "D:/Programs/MSYS/mingw64/lib"
 )

@@ -1,0 +1,44 @@
+[
+{
+  "directory": "C:/Users/YohanesOktanio/Documents/Code/emulator/build",
+  "command": "C:\\runtime\\QT\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/YohanesOktanio/Documents/Code/emulator/build/rdp_emulator_autogen/include -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtCore -isystem C:/runtime/QT/6.11.1/mingw_64/include -isystem C:/runtime/QT/6.11.1/mingw_64/mkspecs/win32-g++ -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtGui -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtWidgets -isystem C:/vcpkg/installed/x64-windows/include/freerdp3 -isystem C:/vcpkg/installed/x64-windows/include/winpr3 -std=gnu++17 -o CMakeFiles\\rdp_emulator.dir\\rdp_emulator_autogen\\mocs_compilation.cpp.obj -c C:\\Users\\YohanesOktanio\\Documents\\Code\\emulator\\build\\rdp_emulator_autogen\\mocs_compilation.cpp",
+  "file": "C:/Users/YohanesOktanio/Documents/Code/emulator/build/rdp_emulator_autogen/mocs_compilation.cpp",
+  "output": "C:/Users/YohanesOktanio/Documents/Code/emulator/build/CMakeFiles/rdp_emulator.dir/rdp_emulator_autogen/mocs_compilation.cpp.obj"
+},
+{
+  "directory": "C:/Users/YohanesOktanio/Documents/Code/emulator/build",
+  "command": "C:\\runtime\\QT\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/YohanesOktanio/Documents/Code/emulator/build/rdp_emulator_autogen/include -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtCore -isystem C:/runtime/QT/6.11.1/mingw_64/include -isystem C:/runtime/QT/6.11.1/mingw_64/mkspecs/win32-g++ -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtGui -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtWidgets -isystem C:/vcpkg/installed/x64-windows/include/freerdp3 -isystem C:/vcpkg/installed/x64-windows/include/winpr3 -std=gnu++17 -o CMakeFiles\\rdp_emulator.dir\\src\\main.cpp.obj -c C:\\Users\\YohanesOktanio\\Documents\\Code\\emulator\\src\\main.cpp",
+  "file": "C:/Users/YohanesOktanio/Documents/Code/emulator/src/main.cpp",
+  "output": "C:/Users/YohanesOktanio/Documents/Code/emulator/build/CMakeFiles/rdp_emulator.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/YohanesOktanio/Documents/Code/emulator/build",
+  "command": "C:\\runtime\\QT\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/YohanesOktanio/Documents/Code/emulator/build/rdp_emulator_autogen/include -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtCore -isystem C:/runtime/QT/6.11.1/mingw_64/include -isystem C:/runtime/QT/6.11.1/mingw_64/mkspecs/win32-g++ -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtGui -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtWidgets -isystem C:/vcpkg/installed/x64-windows/include/freerdp3 -isystem C:/vcpkg/installed/x64-windows/include/winpr3 -std=gnu++17 -o CMakeFiles\\rdp_emulator.dir\\src\\mainwindow.cpp.obj -c C:\\Users\\YohanesOktanio\\Documents\\Code\\emulator\\src\\mainwindow.cpp",
+  "file": "C:/Users/YohanesOktanio/Documents/Code/emulator/src/mainwindow.cpp",
+  "output": "C:/Users/YohanesOktanio/Documents/Code/emulator/build/CMakeFiles/rdp_emulator.dir/src/mainwindow.cpp.obj"
+},
+{
+  "directory": "C:/Users/YohanesOktanio/Documents/Code/emulator/build",
+  "command": "C:\\runtime\\QT\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/YohanesOktanio/Documents/Code/emulator/build/rdp_emulator_autogen/include -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtCore -isystem C:/runtime/QT/6.11.1/mingw_64/include -isystem C:/runtime/QT/6.11.1/mingw_64/mkspecs/win32-g++ -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtGui -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtWidgets -isystem C:/vcpkg/installed/x64-windows/include/freerdp3 -isystem C:/vcpkg/installed/x64-windows/include/winpr3 -std=gnu++17 -o CMakeFiles\\rdp_emulator.dir\\src\\phoneframe.cpp.obj -c C:\\Users\\YohanesOktanio\\Documents\\Code\\emulator\\src\\phoneframe.cpp",
+  "file": "C:/Users/YohanesOktanio/Documents/Code/emulator/src/phoneframe.cpp",
+  "output": "C:/Users/YohanesOktanio/Documents/Code/emulator/build/CMakeFiles/rdp_emulator.dir/src/phoneframe.cpp.obj"
+},
+{
+  "directory": "C:/Users/YohanesOktanio/Documents/Code/emulator/build",
+  "command": "C:\\runtime\\QT\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/YohanesOktanio/Documents/Code/emulator/build/rdp_emulator_autogen/include -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtCore -isystem C:/runtime/QT/6.11.1/mingw_64/include -isystem C:/runtime/QT/6.11.1/mingw_64/mkspecs/win32-g++ -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtGui -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtWidgets -isystem C:/vcpkg/installed/x64-windows/include/freerdp3 -isystem C:/vcpkg/installed/x64-windows/include/winpr3 -std=gnu++17 -o CMakeFiles\\rdp_emulator.dir\\src\\rdpclient.cpp.obj -c C:\\Users\\YohanesOktanio\\Documents\\Code\\emulator\\src\\rdpclient.cpp",
+  "file": "C:/Users/YohanesOktanio/Documents/Code/emulator/src/rdpclient.cpp",
+  "output": "C:/Users/YohanesOktanio/Documents/Code/emulator/build/CMakeFiles/rdp_emulator.dir/src/rdpclient.cpp.obj"
+},
+{
+  "directory": "C:/Users/YohanesOktanio/Documents/Code/emulator/build",
+  "command": "C:\\runtime\\QT\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/YohanesOktanio/Documents/Code/emulator/build/rdp_emulator_autogen/include -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtCore -isystem C:/runtime/QT/6.11.1/mingw_64/include -isystem C:/runtime/QT/6.11.1/mingw_64/mkspecs/win32-g++ -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtGui -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtWidgets -isystem C:/vcpkg/installed/x64-windows/include/freerdp3 -isystem C:/vcpkg/installed/x64-windows/include/winpr3 -std=gnu++17 -o CMakeFiles\\rdp_emulator.dir\\src\\rdpscreen.cpp.obj -c C:\\Users\\YohanesOktanio\\Documents\\Code\\emulator\\src\\rdpscreen.cpp",
+  "file": "C:/Users/YohanesOktanio/Documents/Code/emulator/src/rdpscreen.cpp",
+  "output": "C:/Users/YohanesOktanio/Documents/Code/emulator/build/CMakeFiles/rdp_emulator.dir/src/rdpscreen.cpp.obj"
+},
+{
+  "directory": "C:/Users/YohanesOktanio/Documents/Code/emulator/build",
+  "command": "C:\\runtime\\QT\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/YohanesOktanio/Documents/Code/emulator/build/rdp_emulator_autogen/include -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtCore -isystem C:/runtime/QT/6.11.1/mingw_64/include -isystem C:/runtime/QT/6.11.1/mingw_64/mkspecs/win32-g++ -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtGui -isystem C:/runtime/QT/6.11.1/mingw_64/include/QtWidgets -isystem C:/vcpkg/installed/x64-windows/include/freerdp3 -isystem C:/vcpkg/installed/x64-windows/include/winpr3 -std=gnu++17 -o CMakeFiles\\rdp_emulator.dir\\src\\toolbutton.cpp.obj -c C:\\Users\\YohanesOktanio\\Documents\\Code\\emulator\\src\\toolbutton.cpp",
+  "file": "C:/Users/YohanesOktanio/Documents/Code/emulator/src/toolbutton.cpp",
+  "output": "C:/Users/YohanesOktanio/Documents/Code/emulator/build/CMakeFiles/rdp_emulator.dir/src/toolbutton.cpp.obj"
+}
+]
