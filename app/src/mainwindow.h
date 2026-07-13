@@ -21,7 +21,6 @@ public:
 private slots:
     void startAndroid();
     void stopAndroid();
-    void restartAndroid();
 
 private:
     void loadSettings();

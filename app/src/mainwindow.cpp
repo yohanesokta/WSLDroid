@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setWindowTitle("Emulator Manager");
     resize(800, 600);
-    setStyleSheet("background-color: #0f172a; color: #f8fafc;");
+    setStyleSheet("background-color: #050505; color: #f5f5f5;");
 
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -64,39 +64,33 @@ MainWindow::MainWindow(QWidget *parent)
     
     // Lifecycle Group
     QGroupBox *lifecycleGroup = new QGroupBox("Device Lifecycle");
-    lifecycleGroup->setStyleSheet("QGroupBox { border: 1px solid #334155; border-radius: 5px; margin-top: 10px; } QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top left; padding: 0 3px; color: #94a3b8; }");
+    lifecycleGroup->setStyleSheet("QGroupBox { border: 1px solid #2f2f2f; border-radius: 5px; margin-top: 10px; color: #f5f5f5; } QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top left; padding: 0 3px; color: #b5b5b5; }");
     QVBoxLayout *lifecycleLayout = new QVBoxLayout(lifecycleGroup);
     
     QPushButton *startBtn = new QPushButton("Start Android");
-    startBtn->setStyleSheet("background-color: #4ade80; color: #000000; padding: 10px; border-radius: 5px; font-weight: bold;");
+    startBtn->setStyleSheet("background-color: #1b2a1b; color: #f5f5f5; padding: 10px; border: 1px solid #2f3f2f; border-radius: 5px; font-weight: bold;");
     
-    QHBoxLayout *stopRestartLayout = new QHBoxLayout();
     QPushButton *stopBtn = new QPushButton("Stop");
-    stopBtn->setStyleSheet("background-color: #f87171; color: #000000; padding: 10px; border-radius: 5px; font-weight: bold;");
-    QPushButton *restartBtn = new QPushButton("Restart");
-    restartBtn->setStyleSheet("background-color: #fb7185; color: #000000; padding: 10px; border-radius: 5px; font-weight: bold;");
-    
-    stopRestartLayout->addWidget(stopBtn);
-    stopRestartLayout->addWidget(restartBtn);
+    stopBtn->setStyleSheet("background-color: #2a1b1b; color: #f5f5f5; padding: 10px; border: 1px solid #3f2f2f; border-radius: 5px; font-weight: bold;");
     
     lifecycleLayout->addWidget(startBtn);
-    lifecycleLayout->addLayout(stopRestartLayout);
+    lifecycleLayout->addWidget(stopBtn);
     
     // Settings Group
     QGroupBox *settingsGroup = new QGroupBox("Settings");
-    settingsGroup->setStyleSheet("QGroupBox { border: 1px solid #334155; border-radius: 5px; margin-top: 10px; } QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top left; padding: 0 3px; color: #94a3b8; }");
+    settingsGroup->setStyleSheet("QGroupBox { border: 1px solid #2f2f2f; border-radius: 5px; margin-top: 10px; color: #f5f5f5; } QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top left; padding: 0 3px; color: #b5b5b5; }");
     QVBoxLayout *settingsLayout = new QVBoxLayout(settingsGroup);
     
     QHBoxLayout *resLayout = new QHBoxLayout();
     resLayout->addWidget(new QLabel("Width:"));
     QLineEdit *widthEdit = new QLineEdit("393");
     widthEdit->setObjectName("widthEdit");
-    widthEdit->setStyleSheet("background-color: #1e293b; border: 1px solid #334155; padding: 5px; color: white;");
+    widthEdit->setStyleSheet("background-color: #111111; border: 1px solid #333333; padding: 5px; color: #f5f5f5;");
     resLayout->addWidget(widthEdit);
     resLayout->addWidget(new QLabel("Height:"));
     QLineEdit *heightEdit = new QLineEdit("852");
     heightEdit->setObjectName("heightEdit");
-    heightEdit->setStyleSheet("background-color: #1e293b; border: 1px solid #334155; padding: 5px; color: white;");
+    heightEdit->setStyleSheet("background-color: #111111; border: 1px solid #333333; padding: 5px; color: #f5f5f5;");
     resLayout->addWidget(heightEdit);
     
     settingsLayout->addLayout(resLayout);
@@ -127,7 +121,7 @@ MainWindow::MainWindow(QWidget *parent)
         distroCombo->addItem("Ubuntu-22.04 (Default)");
     }
     
-    distroCombo->setStyleSheet("background-color: #1e293b; border: 1px solid #334155; padding: 5px; color: white;");
+    distroCombo->setStyleSheet("background-color: #111111; border: 1px solid #333333; padding: 5px; color: #f5f5f5;");
     distroLayout->addWidget(distroCombo);
     settingsLayout->addLayout(distroLayout);
     
@@ -138,18 +132,17 @@ MainWindow::MainWindow(QWidget *parent)
     
     // Logs
     QLabel *logLabel = new QLabel("DEBUG LOGS");
-    logLabel->setStyleSheet("color: #94a3b8; font-weight: bold; margin-top: 10px;");
+    logLabel->setStyleSheet("color: #b5b5b5; font-weight: bold; margin-top: 10px;");
     mainLayout->addWidget(logLabel);
     
     QTextEdit *logEdit = new QTextEdit();
     logEdit->setObjectName("logEdit");
     logEdit->setReadOnly(true);
-    logEdit->setStyleSheet("background-color: #020617; border: 1px solid #334155; font-family: monospace; color: #e2e8f0;");
+    logEdit->setStyleSheet("background-color: #0b0b0b; border: 1px solid #2f2f2f; font-family: monospace; color: #eaeaea;");
     mainLayout->addWidget(logEdit);
     
     connect(startBtn, &QPushButton::clicked, this, &MainWindow::startAndroid);
     connect(stopBtn, &QPushButton::clicked, this, &MainWindow::stopAndroid);
-    connect(restartBtn, &QPushButton::clicked, this, &MainWindow::restartAndroid);
     
     loadSettings();
 }
@@ -181,13 +174,13 @@ void MainWindow::logMessage(const QString &level, const QString &message)
 
     QTextEdit *logEdit = findChild<QTextEdit*>("logEdit");
     QString timeStr = QDateTime::currentDateTime().toString("hh:mm:ss.zzz");
-    QString color = "#e2e8f0";
+    QString color = "#eaeaea";
     if (level == "ERROR") color = "#f87171";
-    else if (level == "INFO") color = "#4ade80";
+    else if (level == "INFO") color = "#86efac";
     else if (level == "WARN") color = "#fbbf24";
-    else if (level == "DEBUG") color = "#60a5fa";
+    else if (level == "DEBUG") color = "#c4c4c4";
     
-    QString formattedMsg = QString("<span style='color: #94a3b8;'>%1</span> &nbsp; <span style='color: %2; font-weight: bold;'>%3</span> &nbsp; %4")
+    QString formattedMsg = QString("<span style='color: #8a8a8a;'>%1</span> &nbsp; <span style='color: %2; font-weight: bold;'>%3</span> &nbsp; %4")
                                .arg(timeStr, color, level.leftJustified(5, ' '), message);
     logEdit->append(formattedMsg);
 }
@@ -465,13 +458,5 @@ void MainWindow::stopAndroid()
     runScript("stop-android.bat", args);
 }
 
-void MainWindow::restartAndroid()
-{
-    logMessage("INFO", "Restarting Android...");
-    stopAndroid();
-    // In a robust implementation, we should wait for stop to finish before starting
-    // For simplicity, calling start after a short delay or chaining them
-    QTimer::singleShot(2000, this, &MainWindow::startAndroid);
-}
 
 
