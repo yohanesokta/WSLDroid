@@ -8,6 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Enable Qt's MOC and UIC automatic processors
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 # Qt 6 configuration
 find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
@@ -18,6 +19,8 @@ find_package(FreeRDP-Client CONFIG REQUIRED)
 find_package(WinPR CONFIG REQUIRED)
 
 add_executable(rdp_emulator
+    resources/app.rc
+    resources.qrc
     src/main.cpp
     src/mainwindow.h
     src/mainwindow.cpp
@@ -29,6 +32,8 @@ add_executable(rdp_emulator
     src/rdpscreen.cpp
     src/toolbutton.h
     src/toolbutton.cpp
+    src/readconfig.h
+    src/readconfig.cpp
 )
 
 set_target_properties(rdp_emulator PROPERTIES

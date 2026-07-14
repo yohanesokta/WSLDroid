@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QIcon>
 #include <QProcess>
 #include "mainwindow.h"
 
@@ -17,6 +18,7 @@ int main(int argc, char *argv[]) {
 #endif
 
     QApplication app(argc, argv);
+    app.setWindowIcon(QIcon(":/resources/app.ico"));
     
     
     app.setApplicationName("Custom Weston RDP AVD Emulator");

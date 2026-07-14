@@ -13,6 +13,8 @@
 #include <QProcess>
 #include <QFileInfo>
 #include <QProgressDialog>
+#include <qobject.h>
+#include "readconfig.h"
 
 
 #define INPUT_PTR_FLAGS_MOVE 0x0800
@@ -377,18 +379,19 @@ void RdpScreen::dropEvent(QDropEvent* event) {
                         });
 
                 QString ext = fileInfo.suffix().toLower();
+                std::string ipwaydroid = readFileConfigurationAndroid();
                 if (ext == "apk") {
                     qDebug() << "Installing APK via Drag and Drop:" << filePath;
                     progress->setLabelText("Installing " + fileInfo.fileName() + "...");
-                    process->start("adb", QStringList() << "install" << filePath);
+                    process->start("adb", QStringList() << "-s" << QString::fromStdString(ipwaydroid) << "install" << filePath);
                 } else if (ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "svg" || ext == "gif" || ext == "webp" || ext == "bmp") {
                     qDebug() << "Pushing image to /sdcard/DCIM/ via Drag and Drop:" << filePath;
                     progress->setLabelText("Sending image " + fileInfo.fileName() + " to DCIM...");
-                    process->start("adb", QStringList() << "push" << filePath << "/sdcard/DCIM/");
+                    process->start("adb", QStringList() << "-s" << QString::fromStdString(ipwaydroid)  << "push" << filePath << "/sdcard/DCIM/");
                 } else {
                     qDebug() << "Pushing file to /sdcard/Download/ via Drag and Drop:" << filePath;
                     progress->setLabelText("Sending " + fileInfo.fileName() + " to Downloads...");
-                    process->start("adb", QStringList() << "push" << filePath << "/sdcard/Download/");
+                    process->start("adb", QStringList() << "-s" << QString::fromStdString(ipwaydroid)  << "push" << filePath << "/sdcard/Download/");
                 }
                 progress->show();
             }

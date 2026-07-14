@@ -16,6 +16,9 @@
 #include <QDir>
 #include <QLabel>
 #include <QPushButton>
+#include <qlogging.h>
+#include <qobject.h>
+#include "readconfig.h"
 
 MainWindow::MainWindow(const QString& host, int port, int width, int height, QWidget* parent)
     : QMainWindow(parent), m_host(host), m_port(port), m_width(width), m_height(height) {
@@ -215,8 +218,10 @@ void MainWindow::tryReconnect() {
 
 
 void MainWindow::runAdbCommand(int keyevent) {
+    std::string ipwaydroid = readFileConfigurationAndroid();
+    qDebug() << "ip waydroid : " << ipwaydroid << ":5555"; 
     qDebug() << "Executing ADB keyevent:" << keyevent;
-    QProcess::startDetached("adb", QStringList() << "shell" << "input" << "keyevent" << QString::number(keyevent));
+    QProcess::startDetached("adb ", QStringList() << "-s" << QString::fromStdString(ipwaydroid) << "shell" << "input" << "keyevent" << QString::number(keyevent));
 }
 
 void MainWindow::onToolbarMinimize() {

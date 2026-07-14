@@ -286,8 +286,8 @@ void MainWindow::waitForDistroRunning()
                 const QString trimmedLine = line.trimmed();
                 if (trimmedLine.startsWith(m_distro + " ") || trimmedLine.startsWith("* " + m_distro + " ")) {
                     if (trimmedLine.contains("Running", Qt::CaseInsensitive)) {
-                        logMessage("INFO", "WSL distro is ready.");
-                        startWeston();
+                        logMessage("INFO", "WSL distro is ready. Waiting 5 seconds for systemd initialization...");
+                        QTimer::singleShot(5000, this, &MainWindow::startWeston);
                         return;
                     }
                     break;
@@ -379,12 +379,18 @@ void MainWindow::connectAdb()
         QStringList{ "-d", m_distro, "--exec", "bash", "-lc", "hostname -I | awk '{print $1}'" },
         [this](int, QProcess::ExitStatus, const QString &stdoutText, const QString &) {
             m_wslIp = stdoutText.trimmed();
+            
+            
             if (m_wslIp.isEmpty()) {
                 logMessage("ERROR", "Unable to determine WSL IP.");
                 return;
             }
 
+
             logMessage("INFO", "WSL IP = " + m_wslIp);
+             QProcess::startDetached("cmd",
+                    QStringList{"/c","echo", m_wslIp + ":5555>config.cache"}
+                );
             attemptAdbConnect();
         });
 }
@@ -451,10 +457,8 @@ void MainWindow::stopAndroid()
     logMessage("INFO", "Stopping Android...");
     QString distro = findChild<QComboBox*>("distroCombo")->currentText();
     if(distro.contains(" ")) distro = distro.split(" ").first();
-    
     QStringList args;
     args << distro;
-    
     runScript("stop-android.bat", args);
 }
 

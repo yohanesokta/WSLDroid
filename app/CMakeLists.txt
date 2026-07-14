@@ -14,6 +14,8 @@ add_executable(WSLDroidApp WIN32
     src/main.cpp
     src/mainwindow.cpp
     src/mainwindow.h
+    resources/app.rc
+    resources.qrc
 )
 
 target_link_libraries(WSLDroidApp PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
