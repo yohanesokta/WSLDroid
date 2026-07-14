@@ -45,6 +45,31 @@ begin
   Result := GetEnv('USERPROFILE');
 end;
 
+function AppFile(const RelativePath: string): string;
+begin
+  Result := ExpandConstant('{app}\' + RelativePath);
+end;
+
+procedure RunWithProgressPage(const Page: TOutputMarqueeProgressWizardPage; const Title, FileName, Params, WorkingDir, StepName: string);
+var
+  ResultCode: Integer;
+begin
+  Page.SetText('WSLDroid', Title);
+  if not Exec(FileName, Params, WorkingDir, SW_HIDE, ewWaitUntilTerminated, ResultCode) then
+  begin
+    Page.Hide;
+    MsgBox(StepName + ' gagal dijalankan.', mbError, MB_OK);
+    Abort;
+  end;
+
+  if ResultCode <> 0 then
+  begin
+    Page.Hide;
+    MsgBox(Format('%s gagal dengan exit code %d.', [StepName, ResultCode]), mbError, MB_OK);
+    Abort;
+  end;
+end;
+
 procedure RaiseIfFailed(const FileName, Params, WorkingDir, StepName: string);
 var
   ResultCode: Integer;
@@ -76,21 +101,27 @@ end;
 procedure CurStepChanged(CurStep: TSetupStep);
 var
   KernelZipPath: string;
-  KernelExtractCmd: string;
+  KernelToolPath: string;
   WslImageDir: string;
   WslTarXz: string;
   WslTar: string;
   DistroInstallDir: string;
   ImportCmd: string;
+  ProgressPage: TOutputMarqueeProgressWizardPage;
 begin
   if CurStep <> ssPostInstall then
     Exit;
 
+  ProgressPage := CreateOutputMarqueeProgressPage('Mengatur WSLDroid', 'Menyiapkan file instalasi...');
+  ProgressPage.Show;
+
   KernelZipPath := ExpandConstant('C:\kernel\wsl-kernel.zip');
-  KernelExtractCmd := 'Expand-Archive -LiteralPath "' + KernelZipPath + '" -DestinationPath "C:\kernel" -Force';
-  RaiseIfFailed(
-    ExpandConstant('{sys}\powershell.exe'),
-    '-NoProfile -ExecutionPolicy Bypass -Command "' + KernelExtractCmd + '"',
+  KernelToolPath := AppFile('runtimes\unzip.exe');
+  RunWithProgressPage(
+    ProgressPage,
+    'Mengekstrak kernel WSL...',
+    KernelToolPath,
+    '-o "' + KernelZipPath + '" -d "C:\kernel"',
     '',
     'Ekstraksi kernel WSL'
   );
@@ -104,21 +135,44 @@ begin
   ForceDirectories(WslImageDir);
   ForceDirectories(DistroInstallDir);
 
-  RaiseIfFailed(
-    ExpandConstant('{sys}\cmd.exe'),
-    '/C tar -xf "' + WslTarXz + '" -C "' + WslImageDir + '"',
+  RunWithProgressPage(
+    ProgressPage,
+    'Mengekstrak image WSL...',
+    AppFile('runtimes\xz.exe'),
+    '-d -k "' + WslTarXz + '"',
     WslImageDir,
     'Ekstraksi debian.tar.xz'
   );
 
   ImportCmd := '--import "WSLDroid" "' + DistroInstallDir + '" "' + WslTar + '" --version 2';
-  RaiseIfFailed(
+  RunWithProgressPage(
+    ProgressPage,
+    'Mengimpor distro ke WSL...',
     ExpandConstant('{sys}\wsl.exe'),
     ImportCmd,
     WslImageDir,
     'Import distro WSL'
   );
 
+    RunWithProgressPage(
+    ProgressPage,
+    'Mengatur user default...',
+    ExpandConstant('{sys}\wsl.exe'),
+    '--manage "WSLDroid" --set-default-user wsldroid',
+    '',
+    'Set default user'
+    );
+
+    RunWithProgressPage(
+    ProgressPage,
+    'Memulai ulang WSL...',
+    ExpandConstant('{sys}\wsl.exe'),
+    '--shutdown',
+    '',
+    'Restart WSL'
+    );
+
   DeleteIfExists(WslTar);
   DeleteIfExists(WslTarXz);
+  ProgressPage.Hide;
 end;
